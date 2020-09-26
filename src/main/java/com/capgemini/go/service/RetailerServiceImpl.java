@@ -1,6 +1,7 @@
 package com.capgemini.go.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class RetailerServiceImpl implements RetailerService {
 	@Override
 	public List<RetailerDto> viewRetailers() {
 		List<RetailerDto> retailerList=(List<RetailerDto>)retailerDao.findAll();
-		if(retailerList.size()>0) {
+		if(!retailerList.isEmpty()) {
 		return retailerList;
 		}
 		else {
@@ -64,8 +65,9 @@ public class RetailerServiceImpl implements RetailerService {
 
 	@Override
 	public RetailerDto getRetailer(String retailerId) {
-		if(retailerDao.existsById(retailerId)) {
-		return retailerDao.findById(retailerId).get();
+		Optional<RetailerDto> retailerOptional =retailerDao.findById(retailerId);
+		if(retailerOptional.isPresent()) {
+		return retailerOptional.get();
 		}
 		else {
 			throw new RetailerExcpetion("Fail to find the retailer!");

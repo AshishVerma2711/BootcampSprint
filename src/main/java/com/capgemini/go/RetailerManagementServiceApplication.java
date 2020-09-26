@@ -38,8 +38,7 @@ public class RetailerManagementServiceApplication {
 		}
 	 
 	 private ApiInfo myApiInfo() {
-			// TODO Auto-generated method stub
-			ApiInfo apiInfo=new ApiInfo(
+			return new ApiInfo(
 					"Retailer Management service API", 
 				     "Add,update,delete and fetchs  the retailer details.", 
 				     "1.0", 
@@ -48,6 +47,5 @@ public class RetailerManagementServiceApplication {
 				     "API licence",
 				     "/api",
 				     Collections.emptyList());
-			return apiInfo;
 		}
 }

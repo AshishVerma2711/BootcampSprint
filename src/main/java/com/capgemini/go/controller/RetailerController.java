@@ -15,44 +15,53 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.go.dto.RetailerDto;
 import com.capgemini.go.service.RetailerService;
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 
 @RestController
 public class RetailerController {
 
 	@Autowired
 	RetailerService retailerService;
-	
-	@PostMapping(path="/addRetailer")
+
+	Logger logger = LoggerFactory.getLogger(RetailerController.class);
+
+	@PostMapping(path = "/addRetailer")
 	@ResponseBody
-	public ResponseEntity<RetailerDto> addRetailer(@RequestBody RetailerDto retailerDto){
-		RetailerDto addedRetailer= retailerService.addRetailer(retailerDto);
-		return new ResponseEntity<RetailerDto>(addedRetailer,HttpStatus.OK);
+	public ResponseEntity<RetailerDto> addRetailer(@RequestBody RetailerDto retailer) {
+		RetailerDto addedRetailer = retailerService.addRetailer(retailer);
+		logger.debug("Retailer Added Successfully");
+		return new ResponseEntity<>(addedRetailer, HttpStatus.OK);
 	}
-	
-	@PutMapping(path="/updateRetailer")
+
+	@PutMapping(path = "/updateRetailer")
 	@ResponseBody
-	public ResponseEntity<RetailerDto> updateRetailer(@RequestBody RetailerDto retailerDto){
-		RetailerDto updatedRetailer= retailerService.updateRetailer(retailerDto);
-		return new ResponseEntity<RetailerDto>(updatedRetailer,HttpStatus.OK);
+	public ResponseEntity<RetailerDto> updateRetailer(@RequestBody RetailerDto retailer) {
+		RetailerDto updatedRetailer = retailerService.updateRetailer(retailer);
+		logger.debug("Retailer Updated Successfully");
+		return new ResponseEntity<>(updatedRetailer, HttpStatus.OK);
 	}
-	
-	@GetMapping(path="/getAllRetailers")
+
+	@GetMapping(path = "/getAllRetailers")
 	@ResponseBody
-	public ResponseEntity<List<RetailerDto>> getAllRetailers(){
-		List<RetailerDto> retailerList= retailerService.viewRetailers();
-		return new ResponseEntity<List<RetailerDto>>(retailerList,HttpStatus.OK);
+	public ResponseEntity<List<RetailerDto>> getAllRetailers() {
+		List<RetailerDto> retailerList = retailerService.viewRetailers();
+		logger.debug("Retailers fetched Successfully");
+		return new ResponseEntity<>(retailerList, HttpStatus.OK);
 	}
-	
-	@DeleteMapping(path="/deleteRetailer/{retailerId}")
-	public ResponseEntity<String> deleteRetailer(@PathVariable("retailerId") String retailerId){
+
+	@DeleteMapping(path = "/deleteRetailer/{retailerId}")
+	public ResponseEntity<String> deleteRetailer(@PathVariable("retailerId") String retailerId) {
 		retailerService.deleteReatiler(retailerId);
-		return new ResponseEntity<String>("Successfully Deleted",HttpStatus.OK);
+		logger.debug("Retailer deleted Successfully");
+		return new ResponseEntity<>("Successfully Deleted", HttpStatus.OK);
 	}
-	
-	@GetMapping(path="/getRetailer/{retailerId}")
+
+	@GetMapping(path = "/getRetailer/{retailerId}")
 	@ResponseBody
-	public ResponseEntity<RetailerDto> getRetailer(@PathVariable("retailerId") String retailerId){
+	public ResponseEntity<RetailerDto> getRetailer(@PathVariable("retailerId") String retailerId) {
 		RetailerDto retailer = retailerService.getRetailer(retailerId);
-		return new ResponseEntity<RetailerDto>(retailer,HttpStatus.OK);
+		logger.debug("Retailer fetched Successfully with id" + retailerId);
+		return new ResponseEntity<>(retailer, HttpStatus.OK);
 	}
 }
