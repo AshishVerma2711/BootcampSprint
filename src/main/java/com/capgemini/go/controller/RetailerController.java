@@ -1,6 +1,9 @@
 package com.capgemini.go.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,23 +29,23 @@ public class RetailerController {
 
 	Logger logger = LoggerFactory.getLogger(RetailerController.class);
 
-	@PostMapping(path = "/addRetailer")
+	@PostMapping(path = "/retailerList")
 	@ResponseBody
-	public ResponseEntity<RetailerDto> addRetailer(@RequestBody RetailerDto retailer) {
+	public ResponseEntity<RetailerDto> addRetailer(@Valid @RequestBody RetailerDto retailer) {
 		RetailerDto addedRetailer = retailerService.addRetailer(retailer);
 		logger.debug("Retailer Added Successfully");
 		return new ResponseEntity<>(addedRetailer, HttpStatus.OK);
 	}
 
-	@PutMapping(path = "/updateRetailer")
+	@PutMapping(path = "/retailerList")
 	@ResponseBody
-	public ResponseEntity<RetailerDto> updateRetailer(@RequestBody RetailerDto retailer) {
+	public ResponseEntity<RetailerDto> updateRetailer(@Valid @RequestBody RetailerDto retailer) {
 		RetailerDto updatedRetailer = retailerService.updateRetailer(retailer);
 		logger.debug("Retailer Updated Successfully");
 		return new ResponseEntity<>(updatedRetailer, HttpStatus.OK);
 	}
 
-	@GetMapping(path = "/getAllRetailers")
+	@GetMapping(path = "/retailerList")
 	@ResponseBody
 	public ResponseEntity<List<RetailerDto>> getAllRetailers() {
 		List<RetailerDto> retailerList = retailerService.viewRetailers();
@@ -50,14 +53,14 @@ public class RetailerController {
 		return new ResponseEntity<>(retailerList, HttpStatus.OK);
 	}
 
-	@DeleteMapping(path = "/deleteRetailer/{retailerId}")
+	@DeleteMapping(path = "/retailerList/{retailerId}")
 	public ResponseEntity<String> deleteRetailer(@PathVariable("retailerId") String retailerId) {
 		retailerService.deleteReatiler(retailerId);
 		logger.debug("Retailer deleted Successfully");
 		return new ResponseEntity<>("Successfully Deleted", HttpStatus.OK);
 	}
 
-	@GetMapping(path = "/getRetailer/{retailerId}")
+	@GetMapping(path = "/retailerList/{retailerId}")
 	@ResponseBody
 	public ResponseEntity<RetailerDto> getRetailer(@PathVariable("retailerId") String retailerId) {
 		RetailerDto retailer = retailerService.getRetailer(retailerId);
