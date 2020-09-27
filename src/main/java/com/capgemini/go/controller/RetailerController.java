@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.go.dto.RetailerDto;
@@ -33,7 +32,6 @@ public class RetailerController {
 	Logger logger = LoggerFactory.getLogger(RetailerController.class);
 
 	@PostMapping(path = "/retailerList")
-	@ResponseBody
 	public ResponseEntity<RetailerDto> addRetailer(@Valid @RequestBody RetailerDto retailer) {
 		RetailerDto addedRetailer = retailerService.addRetailer(retailer);
 		logger.debug("Retailer Added Successfully");
@@ -41,7 +39,6 @@ public class RetailerController {
 	}
 
 	@PutMapping(path = "/retailerList")
-	@ResponseBody
 	public ResponseEntity<RetailerDto> updateRetailer(@Valid @RequestBody RetailerDto retailer) {
 		RetailerDto updatedRetailer = retailerService.updateRetailer(retailer);
 		logger.debug("Retailer Updated Successfully");
@@ -49,7 +46,6 @@ public class RetailerController {
 	}
 
 	@GetMapping(path = "/retailerList")
-	@ResponseBody
 	public ResponseEntity<List<RetailerDto>> getAllRetailers() {
 		List<RetailerDto> retailerList = retailerService.viewRetailers();
 		logger.debug("Retailers fetched Successfully");
@@ -64,7 +60,6 @@ public class RetailerController {
 	}
 
 	@GetMapping(path = "/retailerList/{retailerId}")
-	@ResponseBody
 	public ResponseEntity<RetailerDto> getRetailer(@PathVariable("retailerId") @Pattern(regexp="R[0-9]{5}" ,message="Invalid! Id must starts with R and have 5 digits after it.") String retailerId) {
 		RetailerDto retailer = retailerService.getRetailer(retailerId);
 		logger.debug("Retailer fetched Successfully with id" + retailerId);
