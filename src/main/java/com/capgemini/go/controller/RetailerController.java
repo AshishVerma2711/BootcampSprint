@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.go.dto.RetailerDto;
 import com.capgemini.go.service.RetailerService;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @Validated
