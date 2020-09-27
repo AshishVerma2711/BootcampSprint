@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -48,4 +49,8 @@ public class RetailerManagementServiceApplication {
 				     "/api",
 				     Collections.emptyList());
 		}
+	 @Bean
+	 public MethodValidationPostProcessor methodValidationPostProcessor() {
+	     return new MethodValidationPostProcessor();
+	 }
 }

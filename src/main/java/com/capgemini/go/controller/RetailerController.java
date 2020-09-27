@@ -3,10 +3,12 @@ package com.capgemini.go.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 
 @RestController
+@Validated
 public class RetailerController {
 
 	@Autowired
@@ -54,7 +57,7 @@ public class RetailerController {
 	}
 
 	@DeleteMapping(path = "/retailerList/{retailerId}")
-	public ResponseEntity<String> deleteRetailer(@PathVariable("retailerId") String retailerId) {
+	public ResponseEntity<String> deleteRetailer(@PathVariable("retailerId") @Pattern(regexp="R[0-9]{5}" ,message="Invalid! Id must starts with R and have 5 digits after it.") String retailerId) {
 		retailerService.deleteReatiler(retailerId);
 		logger.debug("Retailer deleted Successfully");
 		return new ResponseEntity<>("Successfully Deleted", HttpStatus.OK);
@@ -62,7 +65,7 @@ public class RetailerController {
 
 	@GetMapping(path = "/retailerList/{retailerId}")
 	@ResponseBody
-	public ResponseEntity<RetailerDto> getRetailer(@PathVariable("retailerId") String retailerId) {
+	public ResponseEntity<RetailerDto> getRetailer(@PathVariable("retailerId") @Pattern(regexp="R[0-9]{5}" ,message="Invalid! Id must starts with R and have 5 digits after it.") String retailerId) {
 		RetailerDto retailer = retailerService.getRetailer(retailerId);
 		logger.debug("Retailer fetched Successfully with id" + retailerId);
 		return new ResponseEntity<>(retailer, HttpStatus.OK);

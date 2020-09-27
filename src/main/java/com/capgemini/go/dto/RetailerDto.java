@@ -19,7 +19,7 @@ public class RetailerDto {
 	@Column(name="retailer_name")
 	@NotBlank(message = "Name is mandatory")
 	@Size(min=2, message="Must be greater than 2")
-	@Pattern(regexp="" ,message="Invalid Name! name must starts with capital letter.")
+	@Pattern(regexp="[A-Z].*" ,message="Invalid Name! name must starts with capital letter.")
 	String retailername;
 	@Column(name="address")
 	@NotBlank(message = "Address is mandatory")
