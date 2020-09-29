@@ -1,35 +1,51 @@
-package com.capgemini.go.dto;
+package com.capgemini.go.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.capgemini.go.entity.Retailer;
+import com.capgemini.go.dto.RetailerDto;
 
-public class RetailerDto {
+@Entity
+@Table(name = "retailer_table")
+public class Retailer {
+
+	@Id
+	@Column(name = "retailer_id")
 	@Pattern(regexp = "R[0-9]{5}", message = "Invalid! Id must starts with R and have 5 digits after it.")
 	String retailerId;
+	@Column(name = "retailer_name")
 	@NotBlank(message = "Name is mandatory")
 	@Size(min = 2, message = "Must be greater than 2")
 	@Pattern(regexp = "[A-Z].*", message = "Invalid Name! name must starts with capital letter.")
 	String retailername;
+	@Column(name = "address")
 	@NotBlank(message = "Address is mandatory")
 	String address;
+	@Column(name = "zipcode")
 	@Pattern(regexp = "^\\d{3}\\s?\\d{3}$", message = "Invalid zipcode! Must be of 6 digits")
 	@NotBlank(message = "Zip Code is mandatory")
 	String zipcode;
 	@NotBlank(message = "City is mandatory")
+	@Column(name = "city")
 	String city;
+	@Column(name = "state")
 	@NotBlank(message = "State is mandatory")
 	String state;
+	@Column(name = "phone_number")
 	@Pattern(regexp = "^[6789][0-9]{9}", message = "Invalid mobile number!")
 	@NotBlank(message = "Phone Number is mandatory")
 	String phoneNumber;
+	@Column(name = "email")
 	@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "Invalid email!")
 	@NotBlank(message = "Email is mandatory")
 	String email;
 
-	public RetailerDto() {
+	public Retailer() {
 	}
 
 	public String getRetailerId() {
@@ -96,8 +112,8 @@ public class RetailerDto {
 		this.email = email;
 	}
 
-	public RetailerDto(String retailerId, String retailername, String address, String zipcode, String city,
-			String state, String phoneNumber, String email) {
+	public Retailer(String retailerId, String retailername, String address, String zipcode, String city, String state,
+			String phoneNumber, String email) {
 		super();
 		this.retailerId = retailerId;
 		this.retailername = retailername;
@@ -109,8 +125,8 @@ public class RetailerDto {
 		this.email = email;
 	}
 
-	public RetailerDto(String retailername, String address, String zipcode, String city, String state,
-			String phoneNumber, String email) {
+	public Retailer(String retailername, String address, String zipcode, String city, String state, String phoneNumber,
+			String email) {
 		super();
 		this.retailername = retailername;
 		this.address = address;
@@ -121,14 +137,14 @@ public class RetailerDto {
 		this.email = email;
 	}
 
-	public RetailerDto(Retailer retailer) {
-		this.retailerId = retailer.getRetailerId();
-		this.retailername = retailer.getRetailername();
-		this.address = retailer.getAddress();
-		this.zipcode = retailer.getZipcode();
-		this.city = retailer.getCity();
-		this.state = retailer.getState();
-		this.phoneNumber = retailer.getPhoneNumber();
-		this.email = retailer.getEmail();
+	public Retailer(RetailerDto retailerdto) {
+		this.retailerId = retailerdto.getRetailerId();
+		this.retailername = retailerdto.getRetailername();
+		this.address = retailerdto.getAddress();
+		this.zipcode = retailerdto.getZipcode();
+		this.city = retailerdto.getCity();
+		this.state = retailerdto.getState();
+		this.phoneNumber = retailerdto.getPhoneNumber();
+		this.email = retailerdto.getEmail();
 	}
 }

@@ -6,12 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.capgemini.go.dto.RetailerDto;
+import com.capgemini.go.entity.Retailer;
 
 @Repository
-public interface RetailerDao extends CrudRepository<RetailerDto, String> {
-	
-	@Query(value= "Select r.retailerId from RetailerDto r")
+public interface RetailerDao extends CrudRepository<Retailer, String> {
+
+	@Query(value = "Select r.retailerId from Retailer r")
 	public List<String> getAllRetailerIds();
+
 	public boolean existsByEmail(String email);
 }

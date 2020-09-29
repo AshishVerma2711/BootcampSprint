@@ -53,16 +53,19 @@ public class RetailerController {
 	}
 
 	@DeleteMapping(path = "/retailerList/{retailerId}")
-	public ResponseEntity<String> deleteRetailer(@PathVariable("retailerId") @Pattern(regexp="R[0-9]{5}" ,message="Invalid! Id must starts with R and have 5 digits after it.") String retailerId) {
+	public ResponseEntity<String> deleteRetailer(
+			@PathVariable("retailerId") @Pattern(regexp = "R[0-9]{5}", message = "Invalid! Id must starts with R and have 5 digits after it.") String retailerId) {
 		retailerService.deleteReatiler(retailerId);
 		logger.info("Retailer deleted Successfully");
 		return new ResponseEntity<>("Successfully Deleted", HttpStatus.OK);
 	}
 
 	@GetMapping(path = "/retailerList/{retailerId}")
-	public ResponseEntity<RetailerDto> getRetailer(@PathVariable("retailerId") @Pattern(regexp="R[0-9]{5}" ,message="Invalid! Id must starts with R and have 5 digits after it.") String retailerId) {
+	public ResponseEntity<RetailerDto> getRetailer(
+			@PathVariable("retailerId") @Pattern(regexp = "R[0-9]{5}", message = "Invalid! Id must starts with R and have 5 digits after it.") String retailerId) {
 		RetailerDto retailer = retailerService.getRetailer(retailerId);
 		logger.info("Retailer fetched Successfully with id: {}", retailerId);
 		return new ResponseEntity<>(retailer, HttpStatus.OK);
 	}
+
 }

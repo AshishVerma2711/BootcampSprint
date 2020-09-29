@@ -26,31 +26,23 @@ public class RetailerManagementServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RetailerManagementServiceApplication.class, args);
 	}
-	
-	 @Bean
-		public Docket swaggerConfiguration() {
-			return new Docket(DocumentationType.SWAGGER_2)
-					.select()
-					.apis(RequestHandlerSelectors.basePackage("com.capgemini.go"))
-					.paths(PathSelectors.any())
-					.build()
-					.apiInfo(myApiInfo());
-			
-		}
-	 
-	 private ApiInfo myApiInfo() {
-			return new ApiInfo(
-					"Retailer Management service API", 
-				     "Add,update,delete and fetchs  the retailer details.", 
-				     "1.0", 
-				     "Free to Use", 
-				     new Contact("Ashish Verma","/api" ,"ashishverma792@gmail.com"),
-				     "API licence",
-				     "/api",
-				     Collections.emptyList());
-		}
-	 @Bean
-	 public MethodValidationPostProcessor methodValidationPostProcessor() {
-	     return new MethodValidationPostProcessor();
-	 }
+
+	@Bean
+	public Docket swaggerConfiguration() {
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.basePackage("com.capgemini.go")).paths(PathSelectors.any()).build()
+				.apiInfo(myApiInfo());
+
+	}
+
+	private ApiInfo myApiInfo() {
+		return new ApiInfo("Retailer Management service API", "Add,update,delete and fetchs  the retailer details.",
+				"1.0", "Free to Use", new Contact("Ashish Verma", "/api", "ashishverma792@gmail.com"), "API licence",
+				"/api", Collections.emptyList());
+	}
+
+	@Bean
+	public MethodValidationPostProcessor methodValidationPostProcessor() {
+		return new MethodValidationPostProcessor();
+	}
 }
