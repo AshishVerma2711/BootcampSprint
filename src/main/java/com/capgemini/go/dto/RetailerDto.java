@@ -12,7 +12,7 @@ public class RetailerDto {
 	@NotBlank(message = "Name is mandatory")
 	@Size(min = 2, message = "Must be greater than 2")
 	@Pattern(regexp = "[A-Z].*", message = "Invalid Name! name must starts with capital letter.")
-	String retailername;
+	String retailerName;
 	@NotBlank(message = "Address is mandatory")
 	String address;
 	@Pattern(regexp = "^\\d{3}\\s?\\d{3}$", message = "Invalid zipcode! Must be of 6 digits")
@@ -40,12 +40,12 @@ public class RetailerDto {
 		this.retailerId = retailerId;
 	}
 
-	public String getRetailername() {
-		return retailername;
+	public String getRetailerName() {
+		return retailerName;
 	}
 
-	public void setRetailername(String retailername) {
-		this.retailername = retailername;
+	public void setRetailerName(String retailerName) {
+		this.retailerName = retailerName;
 	}
 
 	public String getAddress() {
@@ -96,11 +96,11 @@ public class RetailerDto {
 		this.email = email;
 	}
 
-	public RetailerDto(String retailerId, String retailername, String address, String zipcode, String city,
+	public RetailerDto(String retailerId, String retailerName, String address, String zipcode, String city,
 			String state, String phoneNumber, String email) {
 		super();
 		this.retailerId = retailerId;
-		this.retailername = retailername;
+		this.retailerName = retailerName;
 		this.address = address;
 		this.zipcode = zipcode;
 		this.city = city;
@@ -109,10 +109,10 @@ public class RetailerDto {
 		this.email = email;
 	}
 
-	public RetailerDto(String retailername, String address, String zipcode, String city, String state,
+	public RetailerDto(String retailerName, String address, String zipcode, String city, String state,
 			String phoneNumber, String email) {
 		super();
-		this.retailername = retailername;
+		this.retailerName = retailerName;
 		this.address = address;
 		this.zipcode = zipcode;
 		this.city = city;
@@ -123,7 +123,7 @@ public class RetailerDto {
 
 	public RetailerDto(Retailer retailer) {
 		this.retailerId = retailer.getRetailerId();
-		this.retailername = retailer.getRetailername();
+		this.retailerName = retailer.getRetailerName();
 		this.address = retailer.getAddress();
 		this.zipcode = retailer.getZipcode();
 		this.city = retailer.getCity();
